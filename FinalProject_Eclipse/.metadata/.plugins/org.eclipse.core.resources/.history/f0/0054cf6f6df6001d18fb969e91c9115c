@@ -1,0 +1,61 @@
+/******************************************************************************
+ *
+ * Module: main application
+ *
+ * File Name: main.c
+ *
+ * Description: source file for the main application
+ *
+ * Author: Ahmed Reda
+ *
+ *******************************************************************************/
+#include "mainfunctions.h"
+int main (void)
+{
+	uint8	pass[5] = {0};
+	uint8   pass2[5] = {0};
+	uint8 state = 0x00;
+	SREG|=(1<<7);
+	UART_ConfigType uart_config = {eight_data,disabled,one_stop,9600};
+	Timer1_ConfigType timer1_config = {0,0xffff,F_CPU_8,normal};
+	TWI_ConfigType   twi_config = {0b00000010,0x0002};
+	DcMotor_Init();
+	Timer1_init(&timer1_config);
+	TWI_init(&twi_config);
+	UART_init(&uart_config);
+	while (1)
+	{
+		Pass_from_MC1 (pass);
+		Pass_from_MC1 (pass2);
+		if ((array_check (pass,pass2 )) == 1)
+		{
+			send_status (success);
+			save_EEPROM (pass);
+			state = recieve_status();
+			if (state == motor)
+			{
+				Open_door();
+			}
+			else if (state == chgpass)
+			{
+				send_status (chgpass);
+			}
+
+		}
+		else ((array_check (pass,pass2 )) == 0)
+		{
+			send_status (fail);
+		}
+
+
+
+
+
+	}
+	return 0;
+}
+
+
+
+
+

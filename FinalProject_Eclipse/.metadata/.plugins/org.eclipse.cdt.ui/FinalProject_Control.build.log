@@ -1,0 +1,89 @@
+14:50:44 **** Incremental Build of configuration Debug for project FinalProject_Control ****
+make all 
+Building file: ../Dc_Motor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"Dc_Motor.d" -MT"Dc_Motor.o" -c -o "Dc_Motor.o" "../Dc_Motor.c"
+Finished building: ../Dc_Motor.c
+ 
+Building file: ../PWM.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"PWM.d" -MT"PWM.o" -c -o "PWM.o" "../PWM.c"
+Finished building: ../PWM.c
+ 
+Building file: ../buzzer.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"buzzer.d" -MT"buzzer.o" -c -o "buzzer.o" "../buzzer.c"
+Finished building: ../buzzer.c
+ 
+Building file: ../external_eeprom.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"external_eeprom.d" -MT"external_eeprom.o" -c -o "external_eeprom.o" "../external_eeprom.c"
+Finished building: ../external_eeprom.c
+ 
+Building file: ../gpio.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"gpio.d" -MT"gpio.o" -c -o "gpio.o" "../gpio.c"
+Finished building: ../gpio.c
+ 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+In file included from ../mainfunctions.h:29,
+                 from ../main.c:12:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+Finished building: ../main.c
+ 
+Building file: ../mainfunctions.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"mainfunctions.d" -MT"mainfunctions.o" -c -o "mainfunctions.o" "../mainfunctions.c"
+In file included from ../mainfunctions.h:29,
+                 from ../mainfunctions.c:12:
+c:/winavr-20100110/lib/gcc/../../avr/include/util/delay.h:90:3: warning: #warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+../mainfunctions.c: In function 'delaySeconds':
+../mainfunctions.c:106: warning: large integer implicitly truncated to unsigned type
+Finished building: ../mainfunctions.c
+ 
+Building file: ../timer1.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"timer1.d" -MT"timer1.o" -c -o "timer1.o" "../timer1.c"
+../timer1.c: In function 'Timer1_setCallBack':
+../timer1.c:65: warning: function return types not compatible due to 'volatile'
+Finished building: ../timer1.c
+ 
+Building file: ../twi.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"twi.d" -MT"twi.o" -c -o "twi.o" "../twi.c"
+Finished building: ../twi.c
+ 
+Building file: ../uart.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"uart.d" -MT"uart.o" -c -o "uart.o" "../uart.c"
+Finished building: ../uart.c
+ 
+Building target: FinalProject_Control.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,FinalProject_Control.map -mmcu=atmega32 -o "FinalProject_Control.elf"  ./Dc_Motor.o ./PWM.o ./buzzer.o ./external_eeprom.o ./gpio.o ./main.o ./mainfunctions.o ./timer1.o ./twi.o ./uart.o   
+Finished building target: FinalProject_Control.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S FinalProject_Control.elf  >"FinalProject_Control.lss"
+Finished building: FinalProject_Control.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 FinalProject_Control.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    8786 bytes (26.8% Full)
+(.text + .data + .bootloader)
+
+Data:        283 bytes (13.8% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+14:50:51 Build Finished. 0 errors, 4 warnings. (took 6s.636ms)
+

@@ -1,0 +1,34 @@
+ /******************************************************************************
+ *
+ * Module: main Functions
+ *
+ * File Name: mainfunctions.h
+ *
+ * Description: header file for the Main Functions
+ *
+ * Author: Ahmed Reda
+ *
+ *******************************************************************************/
+
+
+#ifndef MAINFUNCTIONS_H_
+#define MAINFUNCTIONS_H_
+
+#define MC2_READY 0x10
+#define success   0x40
+#define fail      0x41
+#define MC1_READY 0x11
+/*******************************************************************************
+ *                      Functions Prototypes                                   *
+ *******************************************************************************/
+uint8 array_check (uint8 * arr1, uint8 * arr2);
+void Enter_pass ( uint8 * pass);
+void Pass_from_MC1 (uint8* pass);
+void Pass_to_MC1(uint8 * pass);
+void Open_door (uint8 plus);
+void Change_pass (uint8 mins);
+void save_EEPROM (uint8 * pass, uint8 * pass2);
+void load_EEPROM (uint8 * pass);
+void Buzzer (void);
+
+#endif /* MAINFUNCTIONS_H_ */

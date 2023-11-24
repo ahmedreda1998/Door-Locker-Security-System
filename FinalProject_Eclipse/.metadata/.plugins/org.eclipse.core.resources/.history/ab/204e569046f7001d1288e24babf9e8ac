@@ -1,0 +1,91 @@
+/******************************************************************************
+ *
+ * Module: main application
+ *
+ * File Name: main.c
+ *
+ * Description: source file for the main application
+ *
+ * Author: Ahmed Reda
+ *
+ *******************************************************************************/
+#include "mainfunctions.h"
+int main (void)
+{
+	uint8 alarm = 0;
+	uint8 pass[5] = {0};
+	uint8 pass2[5] = {0};
+	uint8 key = 0;
+	uint8 state = 0x00;
+	SREG|=(1<<7);
+	UART_ConfigType uart_config = {eight_data,disabled,one_stop,9600};
+	UART_init(&uart_config);
+	LCD_init();
+	while (1)
+	{
+label1: Screen_1 ();
+		Enter_pass (pass);
+		Pass_to_MC2(pass);
+		Screen_2 ();
+		Enter_pass (pass2);
+		Pass_to_MC2(pass2);
+		state = recieve_status ();
+		if (state == success)
+		{
+label2:	    Screen_3 ();
+			key = KEYPAD_getPressedKey();
+			if (key == '+')
+			{
+				send_status (motor);
+label3:			Screen_1 ();
+				Enter_pass (pass);
+				Pass_to_MC2(pass);
+				state = recieve_status ();
+				if (state == fail)
+				{
+					alarm ++;
+				}
+				if (state == unlock)
+				{
+					Screen_4 ();
+				}
+				state = recieve_status ();
+				if (state == lock)
+				{
+					Screen_5 ();
+				}
+				state = recieve_status ();
+				if (state == done)
+				{
+					goto label2;
+				}
+			}
+			else if (key == '-')
+			{
+				send_status (chgpass);
+				Screen_1 ();
+				Enter_pass (pass);
+				Pass_to_MC2(pass);
+				state = recieve_status ();
+				if (state == success)
+				{
+					goto label1;
+				}
+
+			}
+		}
+		else if (state == fail)
+		{
+			goto label1;
+		}
+
+
+
+
+	}
+
+
+	return 0;
+}
+
+

@@ -1,0 +1,46 @@
+ /******************************************************************************
+ *
+ * Module: main Functions
+ *
+ * File Name: mainfunctions.h
+ *
+ * Description: header file for the Main Functions
+ *
+ * Author: Ahmed Reda
+ *
+ *******************************************************************************/
+
+
+#ifndef MAINFUNCTIONS_H_
+#define MAINFUNCTIONS_H_
+
+#define MC2_READY 0x10
+#define success   0x40
+#define fail      0x41
+#define MC1_READY 0x11
+
+#include <avr/io.h>
+#include <util/delay.h>
+#include "mainfunctions.h"
+#include "buzzer.h"
+#include "Dc_Motor.h"
+#include "timer1.h"
+#include "uart.h"
+#include "twi.h"
+#include "external_eeprom.h"
+#include "gpio.h"
+
+
+/*******************************************************************************
+ *                      Functions Prototypes                                   *
+ *******************************************************************************/
+uint8 array_check (uint8 * arr1, uint8 * arr2);
+void Pass_from_MC1 (uint8* pass);
+void Pass_to_MC1(uint8 * pass);
+void Open_door (void);
+void save_EEPROM (uint8 * pass);
+void load_EEPROM (uint8 * pass);
+void send_status (uint8 state);
+void recieve_status (uint8 state);
+
+#endif /* MAINFUNCTIONS_H_ */

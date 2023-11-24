@@ -1,0 +1,136 @@
+/******************************************************************************
+ *
+ * Module: Main Functions
+ *
+ * File Name: mainfunctions.c
+ *
+ * Description: source file for the  Main Functions
+ *
+ * Author: Ahmed Reda
+ *
+ *******************************************************************************/
+
+#include "mainfunctions.h"
+static volatile uint8 g_sec = 0;
+void Enter_pass ( uint8 * pass)
+{
+	uint8 key = 0;
+	uint8 i=0;
+	while (i<=4)
+	{
+		key = KEYPAD_getPressedKey();
+		if((key >= 0) && (key <= 9))
+		{
+			pass[i] = key;
+			LCD_displayCharacter ('*') ;
+			i++;
+		}
+		_delay_ms(200);
+	}
+
+	while (key!= '=')
+	{
+		key = KEYPAD_getPressedKey();
+	}
+
+}
+uint8 array_check (uint8 * arr1, uint8 * arr2)
+{
+	uint8 i;
+	for (i=0;i<=4;i++)
+	{
+		if (arr1[i]!=arr2[i])
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+ void Screen_1 (void)
+ {
+	 LCD_clearScreen();
+	 LCD_displayStringRowColumn(0,0,"plz enter pass :");
+	 LCD_moveCursor(1,0);
+ }
+ void Screen_2 (void)
+  {
+	 LCD_clearScreen();
+	 LCD_displayStringRowColumn(0,0,"plz re-enter the");
+	 LCD_displayStringRowColumn(1,0,"same pass :");
+
+  }
+ void Screen_3 (void)
+ {
+	 LCD_clearScreen();
+	 LCD_displayStringRowColumn(0,0," + : Open Door");
+	 LCD_displayStringRowColumn(1,0," - : Change Pass");
+ }
+ void Screen_4 (void)
+ {
+	 LCD_clearScreen();
+	 LCD_displayStringRowColumn(0,0,"Door Unlocking");
+
+ }
+ void Screen_5 (void)
+ {
+	 LCD_clearScreen();
+	 LCD_displayStringRowColumn(0,0,"Door locking");
+ }
+ void Screen_6 (void)
+ {
+	 LCD_clearScreen();
+	LCD_displayStringRowColumn(0,0,"Door locking");
+ }
+
+ void Pass_to_MC2(uint8 * pass)
+ {
+	 uint8 i;
+	 while(UART_recieveByte() != MC2_READY){}
+	 for (i=0;i<=4;i++)
+	 {
+		 UART_sendByte(pass[i]);
+	 }
+
+ }
+ void Pass_from_MC2 (uint8* pass)
+ 	{
+ 		uint8 i;
+ 			UART_sendByte(MC1_READY);
+ 			for (i=0;i<=4;i++)
+ 			{
+ 				pass[i]= UART_recieveByte();
+ 			}
+ 	}
+ void send_status (uint8 state)
+ {
+	 while(UART_recieveByte() != MC2_READY){}
+	 UART_sendByte(state);
+ }
+
+  uint8 recieve_status (void)
+ {
+ 	uint8 state = 0;
+ 	UART_sendByte(MC1_READY);
+ 	state= UART_recieveByte();
+ 	return state;
+ }
+
+
+ void countSec(void)
+ {
+ 	g_sec++;
+ }
+
+ void delaySeconds(uint8 sec)
+ {
+ 	/* setting the callBack function to count seconds */
+	 Timer1_setCallBack(countSec);
+ 	/* timer1 configurations to count sec per interrupt */
+ 	Timer1_ConfigType timer1_config = {0,117185,F_CPU_8,compare};
+ 	Timer1_init(&timer1_config);
+ 	while(g_sec < sec);
+ 	g_sec = 0;
+ 	Timer1_deInit();
+
+ }
+

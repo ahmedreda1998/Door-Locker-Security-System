@@ -1,0 +1,43 @@
+ /******************************************************************************
+ *
+ * Module: main Functions
+ *
+ * File Name: mainfunctions.h
+ *
+ * Description: header file for the Main Functions
+ *
+ * Author: Ahmed Reda
+ *
+ *******************************************************************************/
+
+
+#ifndef MAINFUNCTIONS_H_
+#define MAINFUNCTIONS_H_
+
+#include "timer1.h"
+#include "uart.h"
+#include "gpio.h"
+#include "keypad.h"
+#include "lcd.h"
+#include <avr/io.h>
+#include <util/delay.h>
+
+
+
+#define MC2_READY 0x10
+#define success   0x40
+#define fail      0x41
+#define MC1_READY 0x11
+/*******************************************************************************
+ *                      Functions Prototypes                                   *
+ *******************************************************************************/
+void Enter_pass ( uint8 * pass);
+void Screen_1 (void);
+void Screen_2 (void);
+void Screen_3 (void);
+void Pass_to_MC2(uint8 * pass);
+void Pass_from_MC2 (uint8* pass);
+void Change_pass (void);
+
+
+#endif /* MAINFUNCTIONS_H_ */
